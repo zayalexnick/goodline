@@ -40,6 +40,7 @@ export default class extends Component
 					refreshControl={<RefreshControl refreshing={news.getIn(['list', 'pending']) === 'pending'} onRefresh={this._loadNews} /> }
 					data={news.getIn(['list', 'entities']).length > 0 ? news.getIn(['list', 'entities']) : [{}]}
 					renderItem={ ({ item }) => <NewsItem { ...item } navigation={navigation} /> }
+					keyExtractor={(item, index) => index.toString()}
 				/>
 			</Container>
 		);
