@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { Ionicons } from '@expo/vector-icons';
+import { connect } from 'react-redux';
 import { AsyncStorage, ActivityIndicator } from "react-native";
 import { Container } from './styles';
 
+@connect((state) => ({
+	auth: state.auth
+}))
 export default class extends Component
 {
 	async componentDidMount()

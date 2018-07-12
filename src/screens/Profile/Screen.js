@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform } from 'react-native';
+import {AsyncStorage, Platform} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { View, Text } from 'react-native';
 
@@ -9,6 +9,11 @@ export default class extends Component
 		title: 'Профиль',
 		tabBarIcon: ({ focused, tintColor }) => <Ionicons name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'} size={26} color={tintColor} />,
 	});
+
+	async componentDidMount()
+	{
+		await AsyncStorage.removeItem('auth');
+	}
 
 	render()
 	{
