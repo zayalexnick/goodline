@@ -1,26 +1,26 @@
 import React, { Component } from 'react';
-import {AsyncStorage, Platform} from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
+import * as actions from '~/screens/Auth/actions';
+import { View, Text, Button } from 'react-native';
+import theme from '~/theme';
 
+@connect((state) => ({
+	auth: state.auth
+}), actions)
 export default class extends Component
 {
-	static navigationOptions = ({ navigation }) => ({
-		title: 'Профиль',
-		tabBarIcon: ({ focused, tintColor }) => <Ionicons name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'} size={26} color={tintColor} />,
-	});
-
-	async componentDidMount()
-	{
-		await AsyncStorage.removeItem('auth');
-	}
+	_logout = async () => {
+		await this.props.logout();
+		this.props.navigation.navigate('Auth');
+	};
 
 	render()
 	{
 
 		return (
 			<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-				<Text>Profile Screen</Text>
+				<Text>Мне лень заполнять профиль :)</Text>
+				<Button color={theme.colors.primary} title="Выйти" onPress={this._logout} />
 			</View>
 		);
 	}
